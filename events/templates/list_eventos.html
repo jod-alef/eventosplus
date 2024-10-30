@@ -1,0 +1,25 @@
+<h1 class="mb-4">Lista de Eventos</h1>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nome do Evento</th>
+            <th scope="col">Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for evento in eventos %}
+        <tr>
+            <td><a href="{% url 'list_detalhes_eventos' evento.id %}">{{ evento.nome }}</a></td>
+            <td>{{ evento.descricao }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>Nenhum evento cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<ul>
+</ul>
+<a class="btn btn-secondary" href="{% url 'index' %}">Voltar</a>
