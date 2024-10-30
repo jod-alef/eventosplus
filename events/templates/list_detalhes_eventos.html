@@ -1,15 +1,15 @@
 <h1 class="mb-4">Detalhes do eventos: {{ evento.nome }}</h1>
 
 <div class="row">
-    <div class="col">Nome do evento:</div>
-    <div class="col">{{ evento.nome }}</div>
+    <div class="col">Nome do evento: <strong>{{ evento.nome }}</strong></div>
 </div>
 <div class="row">
-    <div class="col">Início: {{ evento.data_inicio }}</div>
-    <div class="col">Final: {{ evento.data_final }}</div>
-    <div class="col">Local: {{ evento.local }}</div>
+    <div class="col">Início: <strong>{{ evento.data_inicio }}</strong></div>
+    <div class="col">Final: <strong>{{ evento.data_final }}</strong></div>
+    <div class="col">Local: <strong>{{ evento.local }}</strong></div>
 </div>
 <div class="row">
     <div class="col-md-2">Descrição:</div>
-    <div class="col">{{ evento.descricao }}</div>
+    <div class="col"><strong>{{ evento.descricao }}</strong></div>
+    <div class="col"><a href="{% url 'inscricao_evento' %}"> Inscrever-se</a></div>
 </div>
