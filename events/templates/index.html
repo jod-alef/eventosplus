@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1 class="display-1">Eventos Plus++</h1>
+<h3 class="display-3">Bem vindos</h3>
+<div style="display: flex; justify-content: flex-end">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Lista de Eventos</h5>
+    <p class="card-text">Veja aqui todos os eventos disponíveis para inscrição.</p>
+    <a href="{% url 'list_eventos' %}" class="btn btn-primary">Ver Lista</a>
+  </div>
+</div>
+    {% if request.user.is_authenticated %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Adicionar Eventos</h5>
+    <p class="card-text">Adicione eventos utilizando nosso formulário.</p>
+    <a href="{% url 'inscricao_de_evento' %}" class="btn btn-primary">Adicionar</a>
+  </div>
+</div>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

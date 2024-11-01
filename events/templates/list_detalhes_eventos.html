@@ -1,15 +1,26 @@
-<h1 class="mb-4">Detalhes do eventos: {{ evento.nome }}</h1>
+{% extends 'index.html' %}
+{% block title %}{{ title }}{% endblock %}
 
-<div class="row">
-    <div class="col">Nome do evento: <strong>{{ evento.nome }}</strong></div>
-</div>
-<div class="row">
-    <div class="col">Início: <strong>{{ evento.data_inicio }}</strong></div>
-    <div class="col">Final: <strong>{{ evento.data_final }}</strong></div>
-    <div class="col">Local: <strong>{{ evento.local }}</strong></div>
-</div>
-<div class="row">
-    <div class="col-md-2">Descrição:</div>
-    <div class="col"><strong>{{ evento.descricao }}</strong></div>
-    <div class="col"><a href="{% url 'inscricao_evento' %}"> Inscrever-se</a></div>
-</div>
+{% block content %}
+    <h1 class="mb-4">Detalhes do eventos: {{ evento.nome }}</h1>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nome do evento</th>
+                <th scope="col">Inicio</th>
+                <th scope="col">Final</th>
+                <th scope="col">Local</th>
+            </tr>
+            <tbody>
+            <td>{{ evento.nome }}</td>
+            <td>{{ evento.data_inicio }}</td>
+            <td>{{ evento.data_final }}</td>
+            <td>{{ evento.local }}</td>
+            </tbody>
+        </table>
+        <div style="display: flex; justify-content: center">{{ evento.descricao }}</div>
+        <div class="align-end container-fluid"><a class="btn btn-primary btn-sm" href="{% url 'inscricao_evento' %}"> Inscrever-se</a></div>
+
+{% endblock %}
