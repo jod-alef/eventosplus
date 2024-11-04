@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class Evento(models.Model):
@@ -7,6 +9,7 @@ class Evento(models.Model):
     data_final = models.DateField()
     descricao = models.TextField()
     local = models.CharField(max_length=50)
+    organizador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"Evento: {self.nome} - Inicio: {self.data_inicio} - Final: {self.data_final} - Descricao: {self.descricao} - Local: {self.local}"
@@ -20,5 +23,3 @@ class Inscricao(models.Model):
 
     def __str__(self):
         return f"Inscricao: {self.nome} - Email: {self.email}"
-
-

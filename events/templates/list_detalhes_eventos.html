@@ -21,6 +21,6 @@
             </tbody>
         </table>
         <div style="display: flex; justify-content: center">{{ evento.descricao }}</div>
-        <div class="align-end container-fluid"><a class="btn btn-primary btn-sm" href="{% url 'inscricao_evento' %}"> Inscrever-se</a></div>
+        <div class="align-end container-fluid"><a class="btn btn-primary btn-sm" href="{% url 'inscricao_evento' %}"> Inscrever-se</a>    <a class="btn btn-primary btn-sm" href="{% url 'list_eventos' %}">Voltar</a></div>
 
 {% endblock %}

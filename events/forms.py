@@ -8,8 +8,8 @@ class InscricaoEvento(forms.ModelForm):
         fields = ['nome', 'data_inicio', 'data_final', 'descricao', 'local']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite o nome do evento'}),
-            'data_inicio': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control'}),
-            'data_final': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control'}),
+            'data_inicio': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control', 'type': 'date'}),
+            'data_final': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control', 'type': 'date'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control'}),
             'local': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite o local do evento'}),
         }
@@ -31,3 +31,5 @@ class InscricaoForm(forms.ModelForm):
         if not email:
             raise forms.ValidationError("O campo email é obrigatório.")
         return email
+
+

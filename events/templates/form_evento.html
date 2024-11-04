@@ -4,7 +4,28 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-  {{ form.as_div }}
+    <table>
+        <tr>
+            <td>Nome da Festa:</td>
+            <td>{{ form.nome }}</td>
+        </tr>
+        <tr>
+            <td>Local:</td>
+            <td>{{ form.local }}</td>
+        </tr>
+        <tr>
+            <td>Data de Início</td>
+            <td>{{ form.data_inicio }}</td>
+        </tr>
+        <tr>
+            <td>Data Final</td>
+            <td>{{ form.data_final }}</td>
+        </tr>
+        <tr>
+            <td>Descrição</td>
+            <td>{{ form.descricao }}</td>
+        </tr>
+    </table>
 
     {% if form.errors %}
         <div class="alert alert-danger">

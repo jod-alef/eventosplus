@@ -21,7 +21,13 @@
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        <a class="nav-link" href="{% url 'list_eventos_organizador' %}">Editar seus eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">Logout</button>
+                        </form>
                     </li>
                     {% else %}
                     <li class="nav-item">

@@ -1,4 +1,3 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -17,6 +16,14 @@ def list_eventos(request):
     descricao = request.GET.get('descricao')
 
     return render(request, 'list_eventos.html', {'eventos': query})
+
+
+def list_eventos_organizador(request):
+    query = Evento.objects.filter(organizador=request.user)
+    nome = request.GET.get('nome')
+    descricao = request.GET.get('descricao')
+
+    return render(request, 'list_eventos_organizador.html', {'eventos': query})
 
 
 def list_detalhes_eventos(request, evento_id):
@@ -41,8 +48,11 @@ def inscricao_de_evento(request):
     if request.method == 'POST':
         form = InscricaoEvento(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('list_eventos')
+            evento = form.save(commit=False)
+            evento.organizador = request.user
+            print(evento.organizador)
+            evento.save()
+            return redirect('list_eventos_organizador')
     else:
         form = InscricaoEvento()
     return render(request, 'form_evento.html', {'form': form})
@@ -60,22 +70,3 @@ def editar_evento(request, evento_id):
     else:
         form = InscricaoEvento(instance=evento)
     return render(request, 'form_evento.html', {'form': form, 'evento': evento})
-
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            return render(request, 'login.html', {'error': 'Credenciais Inválidas'})
-    return render(request, 'login.html')
-
-
-@login_required()
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('index'))
