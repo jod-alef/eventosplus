@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.conf import settings
+from django.contrib.auth.models import User, Group, Permission, AbstractUser
+from django.contrib.contenttypes.models import ContentType
 
 
 class Evento(models.Model):
@@ -16,10 +16,9 @@ class Evento(models.Model):
 
 
 class Inscricao(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
     data_inscricao = models.DateField(auto_now_add=True)
-    evento_assossiado = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    nome_evento = models.CharField(max_length=100)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"Inscricao: {self.nome} - Email: {self.email}"
+        return f"Inscricao: {self.nome_evento} - Usuario: {self.usuario}"

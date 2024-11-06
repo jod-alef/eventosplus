@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Lista de Eventos Inscritos</h1>
+
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nome do Evento</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inscricoes in inscricao %}
+        <tr>
+            <td>>{{ inscricoes.nome_evento }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>Nenhum evento cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<ul>
+</ul>
+<a class="btn btn-secondary" href="{% url 'dashboard' %}">Voltar</a>
+{% endblock %}

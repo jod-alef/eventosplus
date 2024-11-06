@@ -1,3 +1,4 @@
+{% load grupos_tags %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,10 +20,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'list_eventos' %}">Eventos</a>
                     </li>
-                    {% if request.user.is_authenticated %}
+                    {% if request.user|has_group:'Organizadores' %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'list_eventos_organizador' %}">Editar seus eventos</a>
                     </li>
+                    <li class="nav-item">
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                    {% elif request.user.is_authenticated %}
                     <li class="nav-item">
                         <form id="logout-form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}

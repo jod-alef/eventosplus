@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load grupos_tags %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -12,12 +13,27 @@
     <a href="{% url 'list_eventos' %}" class="btn btn-primary">Ver Lista</a>
   </div>
 </div>
-    {% if request.user.is_authenticated %}
+    {% if request.user|has_group:'Organizadores' %}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Adicionar Eventos</h5>
     <p class="card-text">Adicione eventos utilizando nosso formulário.</p>
     <a href="{% url 'inscricao_de_evento' %}" class="btn btn-primary">Adicionar</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Dashboard</h5>
+    <p class="card-text">Crie e edite seus Eventos.</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
+  </div>
+</div>
+    {% elif request.user.is_authenticated %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Dashboard</h5>
+    <p class="card-text">Acompanhe e edite suas inscrições nos eventos.</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
   </div>
 </div>
     {% endif %}

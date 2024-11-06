@@ -20,7 +20,12 @@
             <td>{{ evento.local }}</td>
             </tbody>
         </table>
+
         <div style="display: flex; justify-content: center">{{ evento.descricao }}</div>
-        <div class="align-end container-fluid"><a class="btn btn-primary btn-sm" href="{% url 'inscricao_evento' %}"> Inscrever-se</a>    <a class="btn btn-primary btn-sm" href="{% url 'list_eventos' %}">Voltar</a></div>
+    {% if user.is_authenticated %}
+        <div class="align-end container-fluid"><a class="btn btn-primary btn-sm" href="{% url 'list_eventos' %}">Voltar</a><form id="inscricao-form" method="post" action="{% url 'inscricao_evento' evento.id %}"> {% csrf_token %} <button type="submit" class="btn btn-link">Inscrever-se</button></form></a>
+    {% else %}
+        <a class="btn btn-primary btn-sm" href="{% url 'list_eventos' %}">Voltar</a>   <a class="btn btn-primary btn-sm" href="{% url 'register' %}"> Inscrever-se</a></div>
+    {% endif %}
 
 {% endblock %}
