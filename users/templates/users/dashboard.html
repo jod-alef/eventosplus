@@ -3,6 +3,10 @@
 {% block content %}
 <div class="container-fluid">
 Olá, {{ user.username|default:"Visitante" }} e bem vindo ao Dashboard do usuário do <strong>Eventos Plus++</strong>
+{% if request.user.is_authenticated %}
+    <div class="container-fluid" style="display: flex; justify-content: flex-end"><a class="btn btn-primary btn-md" href="{% url 'editar_usuario' %}">Editar Usuário</a></div>
+{% endif %}
+
 </div>
     <div class="container-fluid" style="padding-top: 20px">
 <h3>Inscrições em Eventos</h3>

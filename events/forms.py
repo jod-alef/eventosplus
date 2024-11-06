@@ -32,3 +32,18 @@ class RegistroUsuario(UserCreationForm):
         if not email:
             raise forms.ValidationError("O campo email é obrigatório.")
         return email
+
+
+class EdicaoUsuario(forms.ModelForm):
+    nome_completo = forms.CharField(max_length=160)
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['nome_completo', 'email']
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise forms.ValidationError("O campo email é obrigatório.")
+        return email
