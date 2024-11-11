@@ -28,8 +28,6 @@ def custom_group_required(required_groups):
 
 def list_eventos(request):
     query = Evento.objects.all()
-    nome = request.GET.get('nome')
-    descricao = request.GET.get('descricao')
 
     return render(request, 'list_eventos.html', {'eventos': query})
 
@@ -37,8 +35,6 @@ def list_eventos(request):
 @custom_group_required(['Organizadores'])
 def list_eventos_organizador(request):
     query = Evento.objects.filter(organizador=request.user)
-    nome = request.GET.get('nome')
-    descricao = request.GET.get('descricao')
 
     return render(request, 'list_eventos_organizador.html', {'eventos': query})
 
@@ -81,8 +77,6 @@ def apagar_inscricao(request, inscricao_id):
 @login_required()
 def list_eventos_organizador(request):
     query = Evento.objects.filter(organizador=request.user)
-    nome = request.GET.get('nome')
-    descricao = request.GET.get('descricao')
 
     return render(request, 'list_eventos_organizador.html', {'eventos': query})
 
@@ -113,3 +107,10 @@ def editar_evento(request, evento_id):
     else:
         form = InscricaoEvento(instance=evento)
     return render(request, 'form_evento.html', {'form': form, 'evento': evento})
+
+
+@custom_group_required(['Organizadores'])
+def listar_participantes_evento(request):
+    inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user)
+
+    return render(request, 'listar_participantes.html', {'inscricoes': inscricoes})

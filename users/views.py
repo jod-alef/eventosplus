@@ -9,8 +9,9 @@ from events.models import Inscricao, Evento
 def dashboard(request):
     inscricao = Inscricao.objects.filter(usuario=request.user)
     eventos = Evento.objects.filter(organizador=request.user)
+    lista_inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user)
 
-    return render(request, "users/dashboard.html", {'inscricao': inscricao, 'eventos': eventos})
+    return render(request, "users/dashboard.html", {'inscricao': inscricao, 'eventos': eventos, 'lista_inscricoes': lista_inscricoes})
 
 
 @login_required

@@ -33,14 +33,21 @@ Olá, {{ user.first_name|default:"Visitante" }} e bem vindo ao Painel de Control
         </tr>
         {% empty %}
         <tr>
-            <td>Nenhum evento cadastrado.</td>
+            <td>Você não está inscrito em nenhum evento.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
     {% if request.user|has_group:'Organizadores' %}
-
+    <div class="row">
+<div class="col-md-6" style="
+    display: flex;
+    flex-direction: column;
+    border-style: groove;
+    padding: 10px;
+    border-radius: 10px;">
 <h3>Eventos Cadastrados</h3>
+
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
@@ -68,6 +75,32 @@ Olá, {{ user.first_name|default:"Visitante" }} e bem vindo ao Painel de Control
     </tbody>
 </table>
          <div><a class="btn btn-success" href="{% url 'inscricao_de_evento' %}"> Cadastrar novo evento</a></div>
+    </div>
+    <div class="col-md-6" style="
+    display: flex;
+    flex-direction: column;
+    border-style: groove;
+    padding: 10px;
+    border-radius: 10px;">
+    <h3>Usuários inscritos</h3>
+
+    <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nome do Evento</th>
+            <th scope="col">Nome do Usuário</th>
+            <th scope="col">Data da Inscrição</th>
+        </tr>
+    </thead>
+        {% for lista in lista_inscricoes %}
+        <tr>
+            <td>{{ lista.detalhes_evento.nome }}</td>
+            <td>{{ lista.usuario }}</td>
+            <td>{{ lista.data_inscricao }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
     {% endif %}
     </div>
 {% endblock %}

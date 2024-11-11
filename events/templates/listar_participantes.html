@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+        {% for inscrica in inscricoes %}
+           <ul>
+            <li> {{ inscrica.data_inscricao }} - {{ inscrica.usuario }} - {{ inscrica.detalhes_evento.nome }}</li>
+           </ul>
+        {% endfor %}
+
+
+
+
+{% endblock %}
