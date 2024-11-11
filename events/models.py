@@ -17,8 +17,8 @@ class Evento(models.Model):
 
 class Inscricao(models.Model):
     data_inscricao = models.DateField(auto_now_add=True)
-    nome_evento = models.CharField(max_length=100)
+    detalhes_evento = models.ForeignKey(Evento, on_delete=models.SET_NULL, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"Inscricao: {self.nome_evento} - Usuario: {self.usuario}"
+        return f"Usuario: {self.usuario}"

@@ -2,9 +2,9 @@
 {% load grupos_tags %}
 {% block content %}
 <div class="container-fluid">
-Olá, {{ user.username|default:"Visitante" }} e bem vindo ao Dashboard do usuário do <strong>Eventos Plus++</strong>
+Olá, {{ user.first_name|default:"Visitante" }} e bem vindo ao Painel de Controle de usuário do <strong>Eventos Plus++</strong>
 {% if request.user.is_authenticated %}
-    <div class="container-fluid" style="display: flex; justify-content: flex-end"><a class="btn btn-primary btn-md" href="{% url 'editar_usuario' %}">Editar Usuário</a></div>
+    <div class="container-fluid" style="display: flex; justify-content: flex-end"><a class="btn btn-primary btn-md" href="{% url 'editar_usuario' %}">Editar Perfil</a></div>
 {% endif %}
 
 </div>
@@ -15,17 +15,19 @@ Olá, {{ user.username|default:"Visitante" }} e bem vindo ao Dashboard do usuár
     <thead class="thead-dark">
         <tr>
             <th scope="col">Nome do Evento</th>
+            <th scope="col">Data</th>
             <th scope="col">Ações</th>
         </tr>
     </thead>
     <tbody>
         {% for inscricoes in inscricao %}
         <tr>
-            <td>>{{ inscricoes.nome_evento }}</td>
+            <td>>{{ inscricoes.detalhes_evento.nome }}</td>
+            <td>>{{ inscricoes.detalhes_evento.data_inicio }}</td>
             <td>
                 <form id="exluir-inscricao" method="post" action="{% url 'apagar_inscricao' inscricoes.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-link">Excluir</button>
+            <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>
             </td>
         </tr>

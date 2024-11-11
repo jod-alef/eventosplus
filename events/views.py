@@ -1,10 +1,9 @@
+from datetime import datetime
 from functools import wraps
-from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, get_object_or_404, redirect
+
 from events.forms import *
 from users.views import *
-import os
 
 
 # Create your views here.
@@ -50,24 +49,14 @@ def list_detalhes_eventos(request, evento_id):
     return render(request, 'list_detalhes_eventos.html', {'evento': evento})
 
 
-def register_usuario(request):
-    if request.method == 'POST':
-        form = RegistroUsuario(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list_eventos')
-    else:
-        form = RegistroUsuario()
-    return render(request, 'registration/register.html', {'form': form})
-
-
 @login_required()
 def inscricao_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
     if request.method == 'POST':
         inscricao = Inscricao.objects.create(
-            nome_evento=evento.nome,
-            usuario=request.user
+            usuario=request.user,
+            data_inscricao=datetime.now(),
+            detalhes_evento=evento,
         )
         inscricao.save()
         return redirect('dashboard')

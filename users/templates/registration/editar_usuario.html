@@ -4,6 +4,14 @@
 <h2>Editar Informações do Usuário</h2>
 <form method="post">
     {% csrf_token %}
+    <p>Olá {{ user.first_name }} {{ user.last_name }}, utilize a tabela abaixo para editar seu usuário</p>
+    <table>
+        <thead>
+        <td>Nome</td>
+        <td>Sobrenome</td>
+        <td>Email</td>
+        </thead>
+    </table>
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Salvar Alterações</button>
 </form>
