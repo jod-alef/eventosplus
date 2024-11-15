@@ -1,11 +1,12 @@
 {% extends 'index.html' %}
+{% load grupos_tags %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 
 <h1 class="mb-4">Lista de Eventos</h1>
 <br />
-    {% if request.user.is_authenticated %}
+    {% if request.user|has_group:'Organizadores' %}
 <div><a class="btn btn-success" href="{% url 'inscricao_de_evento' %}"> Cadastrar novo evento</a></div>
     {% endif %}
 

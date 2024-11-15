@@ -1,5 +1,7 @@
 from datetime import datetime
 from functools import wraps
+
+from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 
 from events.forms import *
@@ -48,6 +50,13 @@ def list_detalhes_eventos(request, evento_id):
 @login_required()
 def inscricao_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
+
+    # Verifica se o usuário já está inscrito no evento
+    if Inscricao.objects.filter(usuario=request.user, detalhes_evento=evento).exists():
+        # Adiciona uma mensagem de erro para informar que o usuário já está inscrito
+        messages.error(request, 'Você já está inscrito neste evento.')
+        return redirect('dashboard')  # Redireciona para a lista de eventos inscritos
+
     if request.method == 'POST':
         inscricao = Inscricao.objects.create(
             usuario=request.user,
@@ -55,7 +64,9 @@ def inscricao_evento(request, evento_id):
             detalhes_evento=evento,
         )
         inscricao.save()
+        messages.success(request, 'Inscrição realizada com sucesso!')
         return redirect('dashboard')
+
     return render(request, 'list_eventos_inscritos.html', {'evento': evento})
 
 
