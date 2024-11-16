@@ -60,8 +60,8 @@
     border-style: groove;
     padding: 10px;
     border-radius: 10px;">
-            <div class="row">
-                <div class="mb-6"><h3>Usuários inscritos</h3></div><div class="mb-3">Inscrições: {{ total_inscricoes }}</div>
+            <div class="row" style="display: flex">
+                <div class="col"><h3>Usuários inscritos</h3></div><div class="col" style="display: flex; justify-content: flex-end"><h5>Inscrições: <span class="badge text-bg-secondary">{{ total_inscricoes }}</span></h5></div>
             </div>
 
             <table class="table table-striped">
