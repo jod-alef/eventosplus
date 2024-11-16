@@ -1,6 +1,6 @@
 # Eventos Plus++
 
-Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django. Ele permite que os organizadores criem e gerenciem eventos, que os usuários se inscrevam em eventos, e inclui funcionalidades como edição de perfil, exportação de inscrições em CSV, entre outras.
+Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django para o projeto de finalização do curso FullStack Python do SENAC 2024.2. Ele permite que os organizadores criem e gerenciem eventos, que os usuários se inscrevam em eventos, e inclui funcionalidades como edição de perfil, exportação de inscrições em CSV, entre outras.
 
 ## Funcionalidades Principais
 
