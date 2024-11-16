@@ -11,6 +11,8 @@
     {% endif %}
 
     {% if request.user|has_group:'Organizadores' %}
+        <div class="container-fluid" style="display: flex; justify-content: flex-end; padding-top: 10px"><a class="btn btn-primary btn-md"
+                                                                                         href="{% url 'exportar_inscricoes' %}">Relatório de Inscrições</a></div>
         <div class="row"><h2 style="padding: 15px">Painel de Controle - Organizador de Eventos</h2></div>
         <div class="row">
         <div class="col-md-6" style="
@@ -58,7 +60,9 @@
     border-style: groove;
     padding: 10px;
     border-radius: 10px;">
-            <h3>Usuários inscritos</h3>
+            <div class="row">
+                <div class="mb-6"><h3>Usuários inscritos</h3></div><div class="mb-3">Inscrições: {{ total_inscricoes }}</div>
+            </div>
 
             <table class="table table-striped">
                 <thead class="thead-dark">

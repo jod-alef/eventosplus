@@ -11,8 +11,9 @@ def dashboard(request):
     eventos = Evento.objects.filter(organizador=request.user)
     lista_inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user)
     lista_eventos = Evento.objects.all()
+    total_inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user).count()
 
-    return render(request, "users/dashboard.html", {'inscricao': inscricao, 'eventos': eventos, 'lista_inscricoes': lista_inscricoes, 'lista_eventos': lista_eventos})
+    return render(request, "users/dashboard.html", {'inscricao': inscricao, 'eventos': eventos, 'lista_inscricoes': lista_inscricoes, 'lista_eventos': lista_eventos, 'total_inscricoes': total_inscricoes})
 
 
 @login_required

@@ -12,7 +12,7 @@ urlpatterns = [
     path('form_evento/', views.inscricao_de_evento, name='inscricao_de_evento'),
     path('editar_evento/<int:evento_id>', views.editar_evento, name='editar_evento'),
     path('apagar_inscricao/<int:inscricao_id>', views.apagar_inscricao, name='apagar_inscricao'),
-
     path('listar_participantes_evento/', views.listar_participantes_evento, name='listar_participantes_evento'),
+    path('exportar-inscricoes/', views.exportar_inscricoes_csv, name='exportar_inscricoes'),
 
 ]

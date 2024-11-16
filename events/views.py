@@ -1,8 +1,10 @@
+import csv
 from datetime import datetime
 from functools import wraps
 
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
 
 from events.forms import *
 from users.views import *
@@ -125,3 +127,20 @@ def listar_participantes_evento(request):
     inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user)
 
     return render(request, 'listar_participantes.html', {'inscricoes': inscricoes})
+
+
+@custom_group_required(['Organizadores'])
+def exportar_inscricoes_csv(request):
+    lista_inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="inscricoes.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Nome do Evento', 'Nome', 'Sobrenome', 'Data de Inscrição', 'Usuário'])
+
+    for inscricao in lista_inscricoes:
+        writer.writerow([inscricao.detalhes_evento.nome, inscricao.usuario.first_name, inscricao.usuario.last_name,
+                         inscricao.data_inscricao, inscricao.usuario.username])
+
+    return response
