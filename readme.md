@@ -10,7 +10,7 @@ Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django p
 - **Listagem de participantes**: Organizadores podem visualizar uma lista de participantes de seus eventos.
 - **Exportação de dados**: Exportação de inscrições em formato CSV.
 - **Edição de perfil**: Usuários podem editar suas informações de perfil.
-- **Dashboard Avançado**: Todas as funções do sistema em um só dashboard dinâmico
+- **Dashboard Avançado**: Todas as funcionalidades do sistema em um só dashboard dinâmico
 
 ## Instalação
 
@@ -36,7 +36,7 @@ Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django p
    python manage.py migrate
    ```
 
-5. **Crie um superusuário** (opcional, para acessar a área administrativa):
+5. **Crie um superusuário**:
    ```bash
    python manage.py createsuperuser
    ```
@@ -45,7 +45,11 @@ Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django p
    ```bash
    python manage.py runserver
    ```
-
+7. **Adicione o grupo 'Organizadores' e adicione os usuários que organizam os eventos**
+   ```bash
+   localhost:8000/admin
+   ```
+   
 ## Estrutura do Projeto
 
 - **`events`**: App principal que gerencia eventos, inscrições e funcionalidades relacionadas.
@@ -71,7 +75,7 @@ Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django p
 - **`editar_evento(request, evento_id)`**: Permite que um organizador edite detalhes de um evento.
 
 ### `views.py` do App `users`
-- **`dashboard(request)`**: Exibe um painel com informações sobre inscrições e eventos do usuário.
+- **`dashboard(request)`**: Exibe um painel com um portal de eventos para usuários e um portal administrativo para organizadores.
 - **`editar_usuario(request)`**: Permite que um usuário edite seu perfil.
 - **`register_usuario(request)`**: Permite que novos usuários se registrem.
 
