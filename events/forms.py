@@ -38,7 +38,6 @@ class RegistroUsuario(UserCreationForm):
 
 
 class EdicaoUsuario(forms.ModelForm):
-
     email = forms.EmailField()
 
     class Meta:

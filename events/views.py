@@ -1,5 +1,5 @@
 import csv
-import datetime
+from datetime import datetime
 from functools import wraps
 
 from django.contrib import messages
@@ -136,13 +136,13 @@ def exportar_inscricoes_csv(request):
     total_inscricoes = Inscricao.objects.filter(detalhes_evento__organizador=request.user).count()
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="inscricoes_{}.csv"'.format(datetime.date.today())
+    response['Content-Disposition'] = 'attachment; filename="inscricoes_{}.csv"'.format(datetime.now())
 
     writer = csv.writer(response)
-    writer.writerow(['Nome do Evento', 'Nome', 'Sobrenome', 'Data de Inscrição', 'Usuário'])
+    writer.writerow(['Nome do Evento', 'Nome', 'Sobrenome', 'Email', 'Data de Inscrição', 'Usuário'])
 
     for inscricao in lista_inscricoes:
         writer.writerow([inscricao.detalhes_evento.nome, inscricao.usuario.first_name, inscricao.usuario.last_name,
-                         inscricao.data_inscricao, inscricao.usuario.username])
+                         inscricao.usuario.email, inscricao.data_inscricao, inscricao.usuario.username])
     writer.writerow([f'Número total de inscrições: {total_inscricoes}'])
     return response
