@@ -11,76 +11,81 @@
     {% endif %}
 
     {% if request.user|has_group:'Organizadores' %}
-        <div class="container-fluid" style="display: flex; justify-content: flex-end; padding-top: 10px"><a class="btn btn-primary btn-md"
-                                                                                         href="{% url 'exportar_inscricoes' %}">Relatório de Inscrições</a></div>
+        <div class="container-fluid" style="display: flex; justify-content: flex-end; padding-top: 10px"><a
+                class="btn btn-primary btn-md"
+                href="{% url 'exportar_inscricoes' %}">Relatório de Inscrições</a></div>
         <div class="row"><h2 style="padding: 15px">Painel de Controle - Organizador de Eventos</h2></div>
         <div class="row">
-        <div class="col-md-6" style="
+            <div class="col-md-6" style="
     display: flex;
     flex-direction: column;
     border-style: groove;
     padding: 10px;
     border-radius: 10px;">
-            <h3>Eventos Cadastrados</h3>
+                <h3>Eventos Cadastrados</h3>
 
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nome do Evento</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for evento in eventos %}
+                <table class="table table-striped">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>>{{ evento.nome }}</td>
-                        <td>{{ evento.descricao }}</td>
-                        {% if request.user.is_authenticated %}
-                            <td><a class="btn btn-primary btn-sm" href="{% url 'editar_evento' evento.id %}">Editar
-                                Evento</a> | <a class="btn btn-info btn-sm"
-                                                href="{% url 'list_detalhes_eventos' evento.id %}">Ver Evento</a></td>
-                        {% else %}
-                            <td><a class="btn btn-primary btn-sm" href="{% url 'list_detalhes_eventos' evento.id %}">Ver
-                                Evento</a></td>
-                        {% endif %}
+                        <th scope="col">Nome do Evento</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Ações</th>
                     </tr>
-                {% empty %}
-                    <tr>
-                        <td>Nenhum evento cadastrado.</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <div><a class="btn btn-success" href="{% url 'inscricao_de_evento' %}"> Cadastrar novo evento</a></div>
-        </div>
-        <div class="col-md-6" style="
-    display: flex;
-    flex-direction: column;
-    border-style: groove;
-    padding: 10px;
-    border-radius: 10px;">
-            <div class="row" style="display: flex">
-                <div class="col"><h3>Usuários inscritos</h3></div><div class="col" style="display: flex; justify-content: flex-end"><h5>Inscrições: <span class="badge text-bg-secondary">{{ total_inscricoes }}</span></h5></div>
+                    </thead>
+                    <tbody>
+                    {% for evento in eventos %}
+                        <tr>
+                            <td>>{{ evento.nome }}</td>
+                            <td>{{ evento.descricao }}</td>
+                            {% if request.user.is_authenticated %}
+                                <td><a class="btn btn-primary btn-sm" href="{% url 'editar_evento' evento.id %}">Editar
+                                    Evento</a> | <a class="btn btn-info btn-sm"
+                                                    href="{% url 'list_detalhes_eventos' evento.id %}">Ver Evento</a>
+                                </td>
+                            {% else %}
+                                <td><a class="btn btn-primary btn-sm"
+                                       href="{% url 'list_detalhes_eventos' evento.id %}">Ver
+                                    Evento</a></td>
+                            {% endif %}
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td>Nenhum evento cadastrado.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div><a class="btn btn-success" href="{% url 'inscricao_de_evento' %}"> Cadastrar novo evento</a></div>
             </div>
+            <div class="col-md-6" style="
+    display: flex;
+    flex-direction: column;
+    border-style: groove;
+    padding: 10px;
+    border-radius: 10px;">
+                <div class="row" style="display: flex">
+                    <div class="col"><h3>Usuários inscritos</h3></div>
+                    <div class="col" style="display: flex; justify-content: flex-end"><h5>Inscrições: <span
+                            class="badge text-bg-secondary">{{ total_inscricoes }}</span></h5></div>
+                </div>
 
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nome do Evento</th>
-                    <th scope="col">Nome do Usuário</th>
-                    <th scope="col">Data da Inscrição</th>
-                </tr>
-                </thead>
-                {% for lista in lista_inscricoes %}
+                <table class="table table-striped">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>{{ lista.detalhes_evento.nome }}</td>
-                        <td>{{ lista.usuario }}</td>
-                        <td>{{ lista.data_inscricao }}</td>
+                        <th scope="col">Nome do Evento</th>
+                        <th scope="col">Nome do Usuário</th>
+                        <th scope="col">Data da Inscrição</th>
                     </tr>
-                {% endfor %}
-            </table>
-        </div>
+                    </thead>
+                    {% for lista in lista_inscricoes %}
+                        <tr>
+                            <td>{{ lista.detalhes_evento.nome }}</td>
+                            <td>{{ lista.usuario }}</td>
+                            <td>{{ lista.data_inscricao }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     {% endif %}
 
@@ -161,10 +166,10 @@
     </div>
 
     {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show " role="alert">{{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-{% endif %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show " role="alert">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

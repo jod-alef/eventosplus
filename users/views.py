@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -23,6 +24,7 @@ def editar_usuario(request):
         form = EdicaoUsuario(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Usuário editado com sucesso!')
             return redirect('dashboard')
         return render(request, 'registration/editar_usuario.html', {'form': form, 'usuario': usuario_atual})
     else:
@@ -36,6 +38,7 @@ def register_usuario(request):
         form = RegistroUsuario(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Usuário criado com sucesso, agora você pode fazer login!')
             return redirect('login')
     else:
         form = RegistroUsuario()

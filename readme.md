@@ -1,6 +1,8 @@
 # Eventos Plus++
 
-Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django para o projeto de finalização do curso FullStack Python do SENAC 2024.2. Ele permite que os organizadores criem e gerenciem eventos, que os usuários se inscrevam em eventos, e inclui funcionalidades como edição de perfil, exportação de inscrições em CSV, entre outras.
+Sistema de gerenciamento de eventos desenvolvido com Django para o projeto de finalização do curso FullStack Python do SENAC 2024.2. Ele permite que os organizadores criem e gerenciem eventos, que os usuários se inscrevam em eventos, e inclui funcionalidades como edição de perfil, exportação de inscrições em CSV, entre outras.
+
+O plano atual é de ampliar as funcionalidades que já existem no sistema para criar algo funcional e aplicável como produto.
 
 ## Funcionalidades Principais
 
@@ -12,12 +14,34 @@ Este projeto é um sistema de gerenciamento de eventos desenvolvido com Django p
 - **Edição de perfil**: Usuários podem editar suas informações de perfil.
 - **Dashboard Avançado**: Todas as funcionalidades do sistema em um só dashboard dinâmico
 
-## Instalação
+## Funcionalidades Planejadas
+
+- **Cadastro avançado de usuários**: 
+  - Inclusão e validação de dados extra ('cpf': validação por função, 'endereço': validação por CEP)
+- **Cadastro avançado de eventos**: 
+  - Galeria de fotos, banner, novidades (crawler notícias?)
+  - Templates para eventos
+- **Ingressos**: 
+  - Opção de compra de ingresso (mercadolivre).
+  - QRCode único em cada ingresso
+  - Sistema de verificação de QRCode (grupo: bilheteria)
+- **Social**: 
+  - Formulário de criação de template social de eventos para compartilhamento em cada rede 
+    - facebook - twitter - whatsapp - instagram - tiktok 
+  - Campos para criação de mídias para compartilhamento (grupo: organizador)
+  - Sistema de compartilhamento (usuário, visitante) 
+- **Frontend**: 
+  - **URGENTE** - Melhorias no dashboard e formulários integrados no site
+  - Implementação de HTMX
+  - Filtros dinâmicos para lista de eventos
+  - Criação de identidade visual
+
+## Instalação _`Versão de Desenvolvimento`_
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seuusuario/event-management-system.git
-   cd event-management-system
+   git clone https://github.com/jod-alef/eventosplus.git
+   cd eventosplus
    ```
 
 2. **Crie e ative um ambiente virtual**:

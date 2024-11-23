@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
- {% if form.errors %}
-    <p>Seu usuário ou senha não conferem.</p>
-  {% endif %}
-
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Sua conta está logada, caso queira logar com outra conta, favor fazer logout.</p>
-    {% else %}
-      <p>Fazer login para ver isso.</p>
+    {% if form.errors %}
+        <p>Seu usuário ou senha não conferem.</p>
     {% endif %}
-  {% endif %}
 
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>Usuário:</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>Senha:</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="Entrar" />
-    <input type="hidden" name="next" value="{{ next }}" />
-  </form>
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Sua conta está logada, caso queira logar com outra conta, favor fazer logout.</p>
+        {% else %}
+            <p>Fazer login para ver isso.</p>
+        {% endif %}
+    {% endif %}
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Perdeu a senha?</a> | <a href="{% url 'register' %}">Criar um usuário</a></p>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Usuário:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>Senha:</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Entrar"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p><a href="{% url 'password_reset' %}">Perdeu a senha?</a> | <a href="{% url 'register' %}">Criar um usuário</a>
+    </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show " role="alert">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
