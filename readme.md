@@ -54,22 +54,27 @@ O plano atual é de ampliar as funcionalidades que já existem no sistema para c
    ```bash
    pip install -r requirements.txt
    ```
+4. **Crie um arquivo .env na raiz do projeto com uma SECRET_KEY**:
+    ```bash
+   # Como gerar uma secret key no console do python:
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
 
-4. **Realize as migrações**:
+5. **Realize as migrações**:
    ```bash
    python manage.py migrate
    ```
 
-5. **Crie um superusuário**:
+6. **Crie um superusuário**:
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Execute o servidor de desenvolvimento**:
+7. **Execute o servidor de desenvolvimento**:
    ```bash
    python manage.py runserver
    ```
-7. **Adicione o grupo 'Organizadores' e adicione os usuários que organizam os eventos**
+8. **Adicione o grupo 'Organizadores' e adicione os usuários que organizam os eventos**
    ```bash
    localhost:8000/admin
    ```
@@ -124,8 +129,6 @@ O plano atual é de ampliar as funcionalidades que já existem no sistema para c
 4. Envie para o repositório remoto (`git push origin feature/nova-funcionalidade`).
 5. Abra um Pull Request.
 
-## Licença
-Este projeto está licenciado sob a licença MIT.
 
 
 
